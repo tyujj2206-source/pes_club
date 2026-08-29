@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" manifest="cache.appcache">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HAMDON.COM | Lapse Chain</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --neon-green: #00ff88;
+  --neon-blue: #00d4ff;
+  --dark-bg: #05070c;
+  --card-bg: rgba(15, 20, 35, 0.9);
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  color: #e0e8f0;
+  font-family: 'Cairo', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#wrap {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: rgba(224, 232, 240, 0.6);
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#state {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--neon-green);
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  min-height: 30px;
+}
+
+#out {
+  white-space: pre-wrap;
+  font: 11px/1.4 Consolas, monospace;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  color: #c8ced8;
+  text-align: left;
+}
+
+.ok { color: #00ff88; }
+.bad { color: #ff4466; }
+.warn { color: #ffaa00; }
+
+.footer {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(224, 232, 240, 0.4);
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .title { font-size: 28px; }
+  .card { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  
+  <div class="header">
+    <img src="preview.png" alt="HAMDON" class="logo">
+    <h1 class="title">HAMDON.COM</h1>
+    <div class="subtitle">Lapse Chain • Firmware 9.00 - 12.02</div>
+  </div>
+
+  <div class="card">
+    <div id="state">جارٍ تحميل سلسلة Lapse...</div>
+    <div id="out"></div>
+  </div>
+
+</div>
+
+<div class="footer">HAMDON.COM • LAPSE EXPLOIT</div>
+
+<script type="module">
+import "./chain_lapse.js";
+</script>
+
+</body>
+</html>
