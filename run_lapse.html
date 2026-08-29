@@ -4,93 +4,182 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HAMDON.COM | Lapse Chain</title>
-<link rel="stylesheet" href="style.css">
 <style>
-    .chain-page {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 40px 20px;
-        text-align: center;
-    }
-    .chain-title {
-        font-size: 36px;
-        font-weight: 900;
-        margin-bottom: 10px;
-        background: linear-gradient(90deg, #00aaff, #00ffe0);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .chain-sub {
-        font-size: 14px;
-        color: #7d93b8;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 30px;
-    }
-    #out {
-        background: rgba(5, 7, 14, 0.8);
-        border: 1px solid rgba(120, 180, 255, 0.2);
-        border-radius: 12px;
-        padding: 20px;
-        font-family: 'Courier New', monospace;
-        font-size: 12px;
-        color: #a9c1e6;
-        text-align: left;
-        max-height: 400px;
-        overflow-y: auto;
-        white-space: pre-wrap;
-        word-break: break-all;
-        backdrop-filter: blur(10px);
-    }
-    .ok { color: #3ddc97; }
-    .bad { color: #ff4d6d; }
-    .warn { color: #ffb066; }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --neon-green: #00ff88;
+  --neon-blue: #00d4ff;
+  --dark-bg: #05070c;
+  --card-bg: rgba(15, 20, 35, 0.9);
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  color: #e0e8f0;
+  font-family: 'Cairo', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#wrap {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: rgba(224, 232, 240, 0.6);
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#state {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--neon-green);
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  min-height: 30px;
+}
+
+#out {
+  white-space: pre-wrap;
+  font: 11px/1.4 Consolas, monospace;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  color: #c8ced8;
+  text-align: left;
+}
+
+.ok { color: #00ff88; }
+.bad { color: #ff4466; }
+.warn { color: #ffaa00; }
+
+.footer {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(224, 232, 240, 0.4);
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .title { font-size: 28px; }
+  .card { padding: 24px; }
+}
 </style>
 </head>
 <body>
 
-<video id="bg-video" autoplay muted loop playsinline preload="auto">
-    <source src="background.mp4" type="video/mp4">
-</video>
-<div class="video-overlay"></div>
+<div id="wrap">
+  
+  <div class="header">
+    <img src="preview.png" alt="HAMDON" class="logo">
+    <h1 class="title">HAMDON.COM</h1>
+    <div class="subtitle">Lapse Chain • Firmware 9.00 - 12.02</div>
+  </div>
 
-<div class="shell">
-    <header class="topbar">
-        <div class="brand">
-            <div class="brand-logo">H</div>
-            <div class="brand-text">
-                <span class="brand-name">HAMDON.COM</span>
-                <span class="brand-sub">Lapse Chain</span>
-            </div>
-        </div>
-        <div class="badge">11.00 - 12.02</div>
-    </header>
+  <div class="card">
+    <div id="state">جارٍ تحميل سلسلة Lapse...</div>
+    <div id="out"></div>
+  </div>
 
-    <main class="wrap">
-        <div class="chain-page">
-            <h1 class="chain-title">Lapse Exploit</h1>
-            <p class="chain-sub">Firmware 11.00 - 12.02</p>
-            <div id="state" class="status-text loading">⏳ Please wait...</div>
-            <div id="out"></div>
-        </div>
-    </main>
-
-    <footer class="foot">
-        <p>❤️ Special thanks to all scene developers</p>
-    </footer>
 </div>
 
+<div class="footer">HAMDON.COM • LAPSE EXPLOIT</div>
+
 <script type="module">
-    var bgVideo = document.getElementById('bg-video');
-    if (bgVideo) {
-        bgVideo.addEventListener('error', function() { bgVideo.style.display = 'none'; });
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) bgVideo.pause();
-            else bgVideo.play().catch(function() {});
-        });
-    }
-    import "./chain_lapse.js";
+import "./chain_lapse.js";
 </script>
+
 </body>
 </html>
