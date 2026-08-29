@@ -3,44 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HAMDON.COM | PS4 Jailbreak 9.00 - 13.00</title>
+<title>HAMDON.COM | PS4 Exploit Host</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --neon-green: #00ff88;
   --neon-blue: #00d4ff;
   --neon-purple: #b026ff;
-  --dark-bg: #05070c;
+  --dark-bg: #05070e;
   --card-bg: rgba(15, 20, 35, 0.85);
 }
 
-html, body {
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
   min-height: 100vh;
+  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  color: #eaf2ff;
   background: var(--dark-bg);
-  color: #e0e8f0;
-  font-family: 'Cairo', system-ui, sans-serif;
-  overflow-x: hidden;
-  position: relative;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(176, 38, 255, 0.06) 0%, transparent 50%);
-  z-index: 0;
-  animation: bgPulse 8s ease-in-out infinite alternate;
-}
-
-@keyframes bgPulse {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
+    radial-gradient(1100px 600px at 85% -10%, rgba(0, 255, 136, 0.12), transparent 55%),
+    radial-gradient(900px 520px at -5% 115%, rgba(0, 212, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, #060b16 0%, #0a1224 45%, #05070e 100%);
+  background-attachment: fixed;
 }
 
 body::after {
@@ -55,531 +47,315 @@ body::after {
   pointer-events: none;
 }
 
-#container {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.logo-section {
-  text-align: center;
-  margin-bottom: 40px;
-  animation: fadeInDown 0.6s ease-out;
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.logo-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid var(--neon-green);
-  box-shadow: 
-    0 0 20px rgba(0, 255, 136, 0.5),
-    0 0 40px rgba(0, 255, 136, 0.3);
-  margin-bottom: 20px;
-  animation: logoGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes logoGlow {
-  0% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
-  100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 60px rgba(0, 255, 136, 0.5); }
-}
-
-.brand-name {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 48px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 4px;
-  margin-bottom: 10px;
-}
-
-.tagline {
-  font-size: 16px;
-  color: rgba(224, 232, 240, 0.7);
-  letter-spacing: 2px;
-}
-
-.main-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 24px;
-  padding: 40px;
-  max-width: 700px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 0.6s ease-out 0.2s both;
+  min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.main-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--neon-green), var(--neon-blue), transparent);
-  animation: scanLine 3s linear infinite;
-}
-
-@keyframes scanLine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.status-box {
-  background: rgba(0, 255, 136, 0.05);
-  border: 1px solid rgba(0, 255, 136, 0.2);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.status-text {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--neon-green);
-  font-family: 'Orbitron', sans-serif;
-  min-height: 36px;
-}
-
-.status-text.detecting { color: var(--neon-blue); }
-.status-text.success { color: var(--neon-green); }
-.status-text.error { color: #ff4466; }
-.status-text.warning { color: #ffaa00; }
-
-.progress-container {
-  margin-top: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-  padding: 16px;
-  border: 1px solid rgba(0, 255, 136, 0.15);
-}
-
-.progress-bar-wrapper {
-  width: 100%;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.progress-bar-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-  border-radius: 6px;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-}
-
-.progress-text {
+/* --- Top Bar --- */
+.topbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-top: 12px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.15);
 }
 
-.progress-percent {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--neon-green);
-}
+.brand { display: flex; align-items: center; }
 
-.progress-label {
-  color: rgba(224, 232, 240, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.info-item {
-  background: rgba(0, 212, 255, 0.05);
-  border: 1px solid rgba(0, 212, 255, 0.15);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-}
-
-.info-label {
-  font-size: 12px;
-  color: rgba(224, 232, 240, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.info-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--neon-blue);
-  font-family: 'Orbitron', sans-serif;
-}
-
-.info-value.fw { color: var(--neon-green); }
-.info-value.bug { color: var(--neon-purple); }
-
-.cache-status {
-  background: rgba(176, 38, 255, 0.05);
-  border: 1px solid rgba(176, 38, 255, 0.15);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  font-size: 14px;
-  color: rgba(224, 232, 240, 0.8);
-  margin-bottom: 24px;
-}
-
-.cache-status.ready {
-  background: rgba(0, 255, 136, 0.05);
-  border-color: rgba(0, 255, 136, 0.2);
-  color: var(--neon-green);
-}
-
-.tap-hint {
-  margin-top: 20px;
-  padding: 12px;
-  background: rgba(255, 170, 0, 0.1);
-  border: 1px solid rgba(255, 170, 0, 0.3);
-  border-radius: 8px;
-  color: #ffaa00;
-  font-size: 14px;
-  text-align: center;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
-.loader-container {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-.loader-dot {
-  width: 12px;
-  height: 12px;
+.brand-logo {
+  width: 50px; height: 50px;
   border-radius: 50%;
-  background: var(--neon-green);
-  animation: dotPulse 1.4s ease-in-out infinite;
+  border: 2px solid var(--neon-green);
+  background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.2));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; color: var(--neon-green);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
 }
 
-.loader-dot:nth-child(2) { animation-delay: 0.2s; background: var(--neon-blue); }
-.loader-dot:nth-child(3) { animation-delay: 0.4s; background: var(--neon-purple); }
+.brand-text { margin-right: 14px; text-align: right; }
+.brand-name { display: block; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; color: #fff; }
+.brand-sub { display: block; font-size: 12px; color: #7d93b8; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
 
-@keyframes dotPulse {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1.2); opacity: 1; }
+.badge {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--neon-green);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.1);
+  padding: 6px 16px; border-radius: 999px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: rgba(224, 232, 240, 0.4);
-  letter-spacing: 2px;
-  font-family: 'Orbitron', sans-serif;
-  z-index: 2;
+/* --- Main Content --- */
+.wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
+
+.hero { margin-bottom: 30px; text-align: center; }
+.hero-title { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: 1px; line-height: 1.2; }
+.hero-title .accent {
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub { margin-top: 10px; font-size: 16px; letter-spacing: 2px; color: #7d93b8; font-weight: 600; }
+
+/* --- Status Panel --- */
+.status-panel {
+  max-width: 700px; width: 100%; margin: 0 auto 40px; padding: 24px;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  backdrop-filter: blur(10px);
 }
 
-@media (max-width: 768px) {
-  .brand-name { font-size: 32px; }
-  .main-card { padding: 24px; }
-  .info-grid { grid-template-columns: 1fr; }
-  .status-text { font-size: 20px; }
-  .progress-percent { font-size: 24px; }
+.status-text { font-size: 18px; letter-spacing: 0.5px; color: #a9c1e6; transition: all 0.3s ease; display: block; margin-bottom: 15px; }
+.status-text.loading { animation: pulse 1.4s ease-in-out infinite; color: var(--neon-blue); }
+.status-text.error { color: #ff4466; }
+.status-text.success { color: var(--neon-green); font-weight: 700; text-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.btn {
+  display: inline-block; padding: 12px 32px; font-size: 16px; font-weight: 800;
+  letter-spacing: 1px; color: #05070e;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  border: none; border-radius: 999px; cursor: pointer;
+  transition: all 0.2s ease; font-family: 'Cairo', sans-serif;
+}
+.btn:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4); }
+.btn.hidden { display: none; }
+
+/* --- Firmware Grid --- */
+.fw-section { width: 100%; }
+.fw-heading { font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #7d93b8; margin-bottom: 20px; text-align: center; }
+
+.fw-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+
+.fw-card {
+  flex: 1 1 140px; max-width: 160px;
+  padding: 20px 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px; text-align: center;
+  transition: all 0.25s ease;
+}
+.fw-card:hover { transform: translateY(-4px); border-color: rgba(0, 212, 255, 0.3); }
+.fw-card.active {
+  border-color: var(--neon-green);
+  background: linear-gradient(180deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.02));
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
 }
 
-#out-container {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-  left: -99999px;
-  top: -99999px;
+.fw-ver { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.fw-card.active .fw-ver { color: var(--neon-green); }
+
+.fw-chain {
+  display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 999px; text-transform: uppercase;
+}
+.fw-chain.lapse { background: rgba(0, 212, 255, 0.15); color: var(--neon-blue); border: 1px solid rgba(0, 212, 255, 0.3); }
+.fw-chain.poops { background: rgba(176, 38, 255, 0.15); color: var(--neon-purple); border: 1px solid rgba(176, 38, 255, 0.3); }
+
+/* --- Footer --- */
+.foot { padding: 20px 0; text-align: center; font-size: 12px; color: #5d7294; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+@media (max-width: 700px) {
+  .hero-title { font-size: 28px; }
+  .fw-card { flex: 1 1 120px; max-width: 140px; padding: 15px 10px; }
 }
 </style>
 </head>
 <body>
 
-<div id="container">
-  
-  <div class="logo-section">
-    <img src="preview.png" alt="HAMDON.COM" class="logo-img">
-    <h1 class="brand-name">HAMDON.COM</h1>
-    <p class="tagline">PS4 Jailbreak • 9.00 - 13.00</p>
-  </div>
-
-  <div class="main-card">
-    
-    <div class="status-box">
-      <div id="state" class="status-text detecting">
-        جارٍ كشف إصدار النظام...
-      </div>
-      
-      <div class="progress-container">
-        <div class="progress-bar-wrapper">
-          <div id="progressBar" class="progress-bar-fill"></div>
+<div class="shell">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-logo">H</div>
+            <div class="brand-text">
+                <span class="brand-name">HAMDON.COM</span>
+                <span class="brand-sub">PS4 Jailbreak Host</span>
+            </div>
         </div>
-        <div class="progress-text">
-          <span id="progressLabel" class="progress-label">جاري التحميل</span>
-          <span id="progressPercent" class="progress-percent">0%</span>
-        </div>
-      </div>
-    </div>
+        <div class="badge">v3.2 Stable</div>
+    </header>
 
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="info-label">Firmware</div>
-        <div id="fw-value" class="info-value fw">--</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">Exploit</div>
-        <div id="bug-value" class="info-value bug">--</div>
-      </div>
-    </div>
+    <main class="wrap">
+        <section class="hero">
+            <h1 class="hero-title">PS4 <span class="accent">WebKit</span> Exploit</h1>
+            <p class="hero-sub">اكتشاف تلقائي للإصدار وسلسلة التهكير المناسبة</p>
+        </section>
 
-    <div id="cache" class="cache-status">
-      جاري التحقق من التخزين المؤقت...
-    </div>
+        <section class="status-panel">
+            <span id="msgs" class="status-text loading">⏳ جارٍ فحص النظام...</span>
+            <br>
+            <button id="runBtn" class="btn hidden" type="button">▶ ابدأ التهكير الآن</button>
+        </section>
 
-    <div id="tapHint" class="tap-hint" style="display: none;">
-       اضغط على الشاشة أو زر X للمتابعة 
-    </div>
+        <section class="fw-section">
+            <h2 class="fw-heading">الإصدارات المدعومة</h2>
+            <div class="fw-grid">
+                <div class="fw-card" data-fw="11.00"><div class="fw-ver">11.00</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="11.50"><div class="fw-ver">11.50</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="11.52"><div class="fw-ver">11.52</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.00"><div class="fw-ver">12.00</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.02"><div class="fw-ver">12.02</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.50"><div class="fw-ver">12.50</div><span class="fw-chain poops">Poops</span></div>
+                <div class="fw-card" data-fw="12.52"><div class="fw-ver">12.52</div><span class="fw-chain poops">Poops</span></div>
+                <div class="fw-card" data-fw="13.00"><div class="fw-ver">13.00</div><span class="fw-chain poops">Poops</span></div>
+            </div>
+        </section>
+    </main>
 
-    <div class="loader-container">
-      <div class="loader-dot"></div>
-      <div class="loader-dot"></div>
-      <div class="loader-dot"></div>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="footer">HAMDON.COM • PS4 JAILBREAK HOST</div>
-
-<div id="out-container">
-  <div id="out"></div>
+    <footer class="foot">
+        <p>❤️ Special thanks to all scene developers & HAMDON.COM</p>
+    </footer>
 </div>
 
 <script>
-(function () {
-    var stateEl = document.getElementById("state");
-    var fwEl = document.getElementById("fw-value");
-    var bugEl = document.getElementById("bug-value");
-    var cacheEl = document.getElementById("cache");
-    var progressBar = document.getElementById("progressBar");
-    var progressPercent = document.getElementById("progressPercent");
-    var progressLabel = document.getElementById("progressLabel");
-    var tapHint = document.getElementById("tapHint");
+    var msgs = document.getElementById('msgs');
+    var runBtn = document.getElementById('runBtn');
 
-    function setState(t, c) { 
-        stateEl.textContent = t; 
-        stateEl.className = "status-text " + (c || "detecting"); 
+    function updateStatus(msg, cls) {
+        msgs.innerHTML = msg;
+        msgs.className = 'status-text' + (cls ? ' ' + cls : '');
     }
 
-    function setCache(t, ok) { 
-        cacheEl.textContent = t; 
-        cacheEl.className = "cache-status" + (ok ? " ready" : ""); 
+    // ========== كشف الفيرموير ==========
+    var uaFull = navigator.userAgent;
+    var match = uaFull.match(/PlayStation 4[ \/](\d+)\.(\d+)/i);
+    var isPS4 = match !== null;
+    var fwVersion = isPS4 ? match[1] + "." + match[2] : "Unknown";
+    var fwNum = 0;
+    var key = null;
+    var bug = null;
+
+    if (match) {
+        key = match[1] + "." + match[2];
+        fwNum = parseInt(match[1], 10) * 100 + parseInt(match[2], 10);
     }
 
-    function updateProgress(percent, label) {
-        progressBar.style.width = percent + "%";
-        progressPercent.textContent = Math.floor(percent) + "%";
-        if (label) progressLabel.textContent = label;
-    }
-
-    function showTapHint(msg) {
-        tapHint.textContent = msg;
-        tapHint.style.display = "block";
-    }
-
-    function hideTapHint() {
-        tapHint.style.display = "none";
-    }
-
-    var params = new URLSearchParams(location.search);
-    var key = null, fwnum = null;
-    var m = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
-
-    updateProgress(10, "جاري كشف الإصدار...");
-
-    if (m) {
-        var minor = parseInt(m[2], 16);
-        var ms = minor.toString(16);
-        if (ms.length < 2) ms = "0" + ms;
-        key = m[1] + "." + ms;
-        fwnum = parseInt(m[1], 10) * 100 + parseInt(ms, 10);
-    }
-
-    updateProgress(25, "تم كشف الإصدار");
-
-    var bug = null, why = "";
-    var forced = params.get("bug");
-
-    if (forced === "lapse" || forced === "poops") {
-        bug = forced;
-        why = "تم التحديد يدوياً: " + forced;
-    } else if (!key) {
-        why = "هذا المتصفح ليس PlayStation 4";
-        fwEl.textContent = "غير معروف";
-        bugEl.textContent = "لا يوجد";
-        setState("نسخة غير مدعومة", "error");
-        updateProgress(100, "فشل");
-        return;
-    } else if (fwnum <= 1202) {
-        bug = "lapse";
-        why = key + " — متوافق (Lapse)";
-    } else if (fwnum >= 1250) {
-        bug = "poops";
-        why = key + " — متوافق (Poops)";
-    } else {
-        why = key + " — غير مدعوم حالياً";
-        fwEl.textContent = key;
-        bugEl.textContent = "غير مدعوم";
-        setState("نسخة غير مدعومة", "error");
-        updateProgress(100, "غير مدعوم");
-        return;
-    }
-
-    fwEl.textContent = key || "غير معروف";
-    bugEl.textContent = bug ? bug.toUpperCase() : "لا يوجد";
-
-    var target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html") + location.search;
-
-    function go() {
-        updateProgress(100, "اكتمل");
-        setState("جارٍ تحميل " + bug + "...", "warning");
-        hideTapHint();
-        setTimeout(function() {
-            location.replace(target);
-        }, 500);
-    }
-
-    function waitForTap(msg, action) {
-        setState(msg, "warning");
-        showTapHint("⚡ اضغط على الشاشة أو زر X للمتابعة ⚡");
-        function fire() {
-            window.removeEventListener("click", fire);
-            window.removeEventListener("keydown", fire);
-            hideTapHint();
-            action();
+    if (isPS4) {
+        if (fwNum <= 1202) {
+            bug = "lapse";
+        } else if (fwNum >= 1250) {
+            bug = "poops";
         }
-        window.addEventListener("click", fire);
-        window.addEventListener("keydown", fire);
     }
 
-    var ac = window.applicationCache;
-    
-    if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        setCache("وضع بدون Cache - تشغيل مباشر", true);
-        updateProgress(90, "جاهز");
-        go();
-    } else if (!navigator.onLine) {
-        setCache("✓ أوفلاين - التشغيل من الذاكرة المؤقتة", true);
-        updateProgress(95, "أوفلاين");
-        go();
-    } else if (ac.status === ac.IDLE) {
-        setCache("✓ التخزين المؤقت جاهز", true);
-        updateProgress(95, "جاهز");
-        go();
-    } else if (ac.status === ac.UPDATEREADY) {
-        try { ac.swapCache(); } catch (e) {}
-        setCache("✓ تم تحميل التحديث", true);
-        updateProgress(95, "تحديث جاهز");
-        waitForTap("تم تحميل التحديث - اضغط للمتابعة", function () { 
-            location.reload(); 
-        });
-    } else {
-        setCache("جارٍ تنزيل الملفات للعمل أوفلاين...", false);
-        updateProgress(50, "جاري التخزين...");
-        
-        ac.addEventListener("downloading", function () { 
-            setCache("⬇ جارٍ تنزيل الملفات للمرة الأولى...", false);
-            updateProgress(60, "بدء التنزيل...");
+    // ========== توجيه مستقر ==========
+    var redirected = false;
+    var reloadedOnce = false;
+    var RELOAD_KEY = 'hamdon_reloaded_v1';
+
+    function redirectToRun() {
+        if (redirected || !isPS4 || !bug) return;
+        redirected = true;
+        var target = bug === 'lapse' ? 'run_lapse.html' : 'run_poops.html';
+        updateStatus('🚀 جارٍ تحميل سلسلة ' + (bug === 'lapse' ? 'Lapse' : 'Poops') + '...', 'success');
+        setTimeout(function() {
+            window.location.replace(target);
+        }, 800);
+    }
+
+    // ========== منطق الكاش (AppCache) الذكي ==========
+    var cacheState = 'unknown';
+    var SAFETY_MS = 30000;
+
+    function showRunButton() {
+        runBtn.className = 'btn';
+    }
+
+    var appCache = window.applicationCache;
+    if (appCache) {
+        appCache.addEventListener('checking', function() {
+            updateStatus('⏳ جارٍ التحقق من الملفات...');
         }, false);
-        
-        ac.addEventListener("progress", function (e) {
+        appCache.addEventListener('downloading', function() {
+            updateStatus('📥 جارٍ تنزيل الملفات للعمل أوفلاين (أول زيارة)...', 'loading');
+        }, false);
+        appCache.addEventListener('progress', function(e) {
             if (e && e.total) {
                 var pct = Math.round((e.loaded / e.total) * 100);
-                setCache(" تنزيل " + pct + "%", false);
-                updateProgress(60 + (pct * 0.35), "تنزيل " + pct + "%");
+                updateStatus('📥 جارٍ التنزيل: ' + pct + '%...', 'loading');
             }
         }, false);
-        
-        ac.addEventListener("cached", function () {
-            setCache("✓ اكتمل التنزيل - الموقع جاهز للعمل أوفلاين!", true);
-            updateProgress(100, "اكتمل التخزين");
-            waitForTap("✓ تم التخزين بنجاح! اضغط للتشغيل", go);
+        appCache.addEventListener('cached', function() {
+            cacheState = 'cold';
+            updateStatus('✅ تم حفظ الملفات بنجاح. اضغط على "ابدأ التهكير الآن"', 'success');
+            showRunButton();
         }, false);
-        
-        ac.addEventListener("updateready", function () {
-            try { ac.swapCache(); } catch (e) {}
-            setCache("✓ تم تحميل التحديث", true);
-            updateProgress(100, "تحديث جاهز");
-            waitForTap("✓ تحديث جاهز - اضغط لإعادة التحميل", function () { 
-                location.reload(); 
-            });
+        appCache.addEventListener('noupdate', function() {
+            cacheState = 'warm';
+            updateStatus('✅ الملفات محدثة وجاهزة - جارٍ البدء...', 'success');
+            setTimeout(redirectToRun, 600);
         }, false);
-        
-        ac.addEventListener("noupdate", function () {
-            setCache("✓ التخزين المؤقت محدّث وجاهز", true);
-            updateProgress(95, "محدّث");
-            go();
+        appCache.addEventListener('updateready', function() {
+            try { appCache.swapCache(); } catch (e) {}
+            if (!reloadedOnce) {
+                reloadedOnce = true;
+                try { sessionStorage.setItem(RELOAD_KEY, '1'); } catch (e) {}
+                updateStatus('🔄 يوجد تحديث - جارٍ إعادة التحميل...', 'loading');
+                setTimeout(function() { location.reload(); }, 300);
+            } else {
+                cacheState = 'warm';
+                updateStatus('✅ تم التحديث بنجاح - جارٍ البدء...', 'success');
+                setTimeout(redirectToRun, 600);
+            }
         }, false);
-        
-        ac.addEventListener("error", function () {
-            setCache("⚠ فشل التخزين المؤقت", false);
-            updateProgress(80, "خطأ في Cache");
-            waitForTap("⚠ فشل التخزين - اضغط للتشغيل", go);
+        appCache.addEventListener('error', function() {
+            cacheState = 'error';
+            updateStatus('⚠️ فشل حفظ الكاش - اضغط "ابدأ" للتشغيل عبر الإنترنت', 'error');
+            showRunButton();
         }, false);
-        
-        ac.addEventListener("obsolete", function () {
-            setCache("⚠ Cache قديم", false);
-            updateProgress(70, "تحديث Cache");
-            waitForTap("⚠ Cache قديم - اضغط للتحديث", go);
+        appCache.addEventListener('obsolete', function() {
+            cacheState = 'error';
+            updateStatus('⚠️ الكاش قديم - اضغط "ابدأ" للمتابعة', 'error');
+            showRunButton();
         }, false);
     }
-})();
-</script>
 
+    document.addEventListener("DOMContentLoaded", function() {
+        if (key) {
+            var cards = document.querySelectorAll('.fw-card');
+            for (var i = 0; i < cards.length; i++) {
+                if (cards[i].getAttribute('data-fw') === key) {
+                    cards[i].className += ' active';
+                }
+            }
+        }
+
+        if (!isPS4) {
+            updateStatus('⚠️ هذه الصفحة مخصصة لجهاز PS4 فقط!', 'error');
+            return;
+        }
+
+        if (!bug) {
+            updateStatus('❌ الإصدار غير مدعوم: ' + fwVersion, 'error');
+            return;
+        }
+
+        updateStatus('✅ تم اكتشاف جهاز PS4 بالإصدار: ' + fwVersion + ' (' + (bug === 'lapse' ? 'Lapse' : 'Poops') + ')', 'success');
+        runBtn.className = 'btn';
+        runBtn.addEventListener('click', redirectToRun, false);
+
+        if (!appCache) {
+            setTimeout(redirectToRun, 400);
+            return;
+        }
+
+        setTimeout(function() {
+            if (!redirected) {
+                updateStatus('⏳ التنزيل بطيء - اضغط "ابدأ التهكير الآن" عندما تكون مستعداً', 'loading');
+                showRunButton();
+            }
+        }, SAFETY_MS);
+    });
+</script>
 </body>
 </html>
