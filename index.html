@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" manifest="cache.appcache">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HAMDON.COM | PS4 Jailbreak 9.00 - 13.00</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --neon-green: #00ff88;
+  --neon-blue: #00d4ff;
+  --neon-purple: #b026ff;
+  --dark-bg: #05070c;
+  --card-bg: rgba(15, 20, 35, 0.85);
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  color: #e0e8f0;
+  font-family: 'Cairo', system-ui, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(176, 38, 255, 0.06) 0%, transparent 50%);
+  z-index: 0;
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-green);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.5),
+    0 0 40px rgba(0, 255, 136, 0.3);
+  margin-bottom: 20px;
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+  100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 60px rgba(0, 255, 136, 0.5); }
+}
+
+.brand-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 16px;
+  color: rgba(224, 232, 240, 0.7);
+  letter-spacing: 2px;
+}
+
+.main-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-green), var(--neon-blue), transparent);
+  animation: scanLine 3s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.status-box {
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.status-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--neon-green);
+  font-family: 'Orbitron', sans-serif;
+  min-height: 36px;
+}
+
+.status-text.detecting { color: var(--neon-blue); }
+.status-text.success { color: var(--neon-green); }
+.status-text.error { color: #ff4466; }
+.status-text.warning { color: #ffaa00; }
+
+.progress-container {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+}
+
+.progress-bar-wrapper {
+  width: 100%;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+}
+
+.progress-percent {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--neon-green);
+}
+
+.progress-label {
+  color: rgba(224, 232, 240, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-item {
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.info-label {
+  font-size: 12px;
+  color: rgba(224, 232, 240, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--neon-blue);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.info-value.fw { color: var(--neon-green); }
+.info-value.bug { color: var(--neon-purple); }
+
+.cache-status {
+  background: rgba(176, 38, 255, 0.05);
+  border: 1px solid rgba(176, 38, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(224, 232, 240, 0.8);
+  margin-bottom: 24px;
+}
+
+.cache-status.ready {
+  background: rgba(0, 255, 136, 0.05);
+  border-color: rgba(0, 255, 136, 0.2);
+  color: var(--neon-green);
+}
+
+.tap-hint {
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid rgba(255, 170, 0, 0.3);
+  border-radius: 8px;
+  color: #ffaa00;
+  font-size: 14px;
+  text-align: center;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.loader-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loader-dot:nth-child(2) { animation-delay: 0.2s; background: var(--neon-blue); }
+.loader-dot:nth-child(3) { animation-delay: 0.4s; background: var(--neon-purple); }
+
+@keyframes dotPulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(224, 232, 240, 0.4);
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .brand-name { font-size: 32px; }
+  .main-card { padding: 24px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .status-text { font-size: 20px; }
+  .progress-percent { font-size: 24px; }
+}
+
+#out-container {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  left: -99999px;
+  top: -99999px;
+}
+</style>
+</head>
+<body>
+
+<div id="container">
+  
+  <div class="logo-section">
+    <img src="preview.png" alt="HAMDON.COM" class="logo-img">
+    <h1 class="brand-name">HAMDON.COM</h1>
+    <p class="tagline">PS4 Jailbreak • 9.00 - 13.00</p>
+  </div>
+
+  <div class="main-card">
+    
+    <div class="status-box">
+      <div id="state" class="status-text detecting">
+        جارٍ كشف إصدار النظام...
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar-wrapper">
+          <div id="progressBar" class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-text">
+          <span id="progressLabel" class="progress-label">جاري التحميل</span>
+          <span id="progressPercent" class="progress-percent">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">Firmware</div>
+        <div id="fw-value" class="info-value fw">--</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Exploit</div>
+        <div id="bug-value" class="info-value bug">--</div>
+      </div>
+    </div>
+
+    <div id="cache" class="cache-status">
+      جاري التحقق من التخزين المؤقت...
+    </div>
+
+    <div id="tapHint" class="tap-hint" style="display: none;">
+       اضغط على الشاشة أو زر X للمتابعة 
+    </div>
+
+    <div class="loader-container">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">HAMDON.COM • PS4 JAILBREAK HOST</div>
+
+<div id="out-container">
+  <div id="out"></div>
+</div>
+
+<script>
+(function () {
+    var stateEl = document.getElementById("state");
+    var fwEl = document.getElementById("fw-value");
+    var bugEl = document.getElementById("bug-value");
+    var cacheEl = document.getElementById("cache");
+    var progressBar = document.getElementById("progressBar");
+    var progressPercent = document.getElementById("progressPercent");
+    var progressLabel = document.getElementById("progressLabel");
+    var tapHint = document.getElementById("tapHint");
+
+    function setState(t, c) { 
+        stateEl.textContent = t; 
+        stateEl.className = "status-text " + (c || "detecting"); 
+    }
+
+    function setCache(t, ok) { 
+        cacheEl.textContent = t; 
+        cacheEl.className = "cache-status" + (ok ? " ready" : ""); 
+    }
+
+    function updateProgress(percent, label) {
+        progressBar.style.width = percent + "%";
+        progressPercent.textContent = Math.floor(percent) + "%";
+        if (label) progressLabel.textContent = label;
+    }
+
+    function showTapHint(msg) {
+        tapHint.textContent = msg;
+        tapHint.style.display = "block";
+    }
+
+    function hideTapHint() {
+        tapHint.style.display = "none";
+    }
+
+    var params = new URLSearchParams(location.search);
+    var key = null, fwnum = null;
+    var m = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
+
+    updateProgress(10, "جاري كشف الإصدار...");
+
+    if (m) {
+        var minor = parseInt(m[2], 16);
+        var ms = minor.toString(16);
+        if (ms.length < 2) ms = "0" + ms;
+        key = m[1] + "." + ms;
+        fwnum = parseInt(m[1], 10) * 100 + parseInt(ms, 10);
+    }
+
+    updateProgress(25, "تم كشف الإصدار");
+
+    var bug = null, why = "";
+    var forced = params.get("bug");
+
+    if (forced === "lapse" || forced === "poops") {
+        bug = forced;
+        why = "تم التحديد يدوياً: " + forced;
+    } else if (!key) {
+        why = "هذا المتصفح ليس PlayStation 4";
+        fwEl.textContent = "غير معروف";
+        bugEl.textContent = "لا يوجد";
+        setState("نسخة غير مدعومة", "error");
+        updateProgress(100, "فشل");
+        return;
+    } else if (fwnum <= 1202) {
+        bug = "lapse";
+        why = key + " — متوافق (Lapse)";
+    } else if (fwnum >= 1250) {
+        bug = "poops";
+        why = key + " — متوافق (Poops)";
+    } else {
+        why = key + " — غير مدعوم حالياً";
+        fwEl.textContent = key;
+        bugEl.textContent = "غير مدعوم";
+        setState("نسخة غير مدعومة", "error");
+        updateProgress(100, "غير مدعوم");
+        return;
+    }
+
+    fwEl.textContent = key || "غير معروف";
+    bugEl.textContent = bug ? bug.toUpperCase() : "لا يوجد";
+
+    var target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html") + location.search;
+
+    function go() {
+        updateProgress(100, "اكتمل");
+        setState("جارٍ تحميل " + bug + "...", "warning");
+        hideTapHint();
+        setTimeout(function() {
+            location.replace(target);
+        }, 500);
+    }
+
+    function waitForTap(msg, action) {
+        setState(msg, "warning");
+        showTapHint("⚡ اضغط على الشاشة أو زر X للمتابعة ⚡");
+        function fire() {
+            window.removeEventListener("click", fire);
+            window.removeEventListener("keydown", fire);
+            hideTapHint();
+            action();
+        }
+        window.addEventListener("click", fire);
+        window.addEventListener("keydown", fire);
+    }
+
+    var ac = window.applicationCache;
+    
+    if (!ac || !document.documentElement.hasAttribute("manifest")) {
+        setCache("وضع بدون Cache - تشغيل مباشر", true);
+        updateProgress(90, "جاهز");
+        go();
+    } else if (!navigator.onLine) {
+        setCache("✓ أوفلاين - التشغيل من الذاكرة المؤقتة", true);
+        updateProgress(95, "أوفلاين");
+        go();
+    } else if (ac.status === ac.IDLE) {
+        setCache("✓ التخزين المؤقت جاهز", true);
+        updateProgress(95, "جاهز");
+        go();
+    } else if (ac.status === ac.UPDATEREADY) {
+        try { ac.swapCache(); } catch (e) {}
+        setCache("✓ تم تحميل التحديث", true);
+        updateProgress(95, "تحديث جاهز");
+        waitForTap("تم تحميل التحديث - اضغط للمتابعة", function () { 
+            location.reload(); 
+        });
+    } else {
+        setCache("جارٍ تنزيل الملفات للعمل أوفلاين...", false);
+        updateProgress(50, "جاري التخزين...");
+        
+        ac.addEventListener("downloading", function () { 
+            setCache("⬇ جارٍ تنزيل الملفات للمرة الأولى...", false);
+            updateProgress(60, "بدء التنزيل...");
+        }, false);
+        
+        ac.addEventListener("progress", function (e) {
+            if (e && e.total) {
+                var pct = Math.round((e.loaded / e.total) * 100);
+                setCache(" تنزيل " + pct + "%", false);
+                updateProgress(60 + (pct * 0.35), "تنزيل " + pct + "%");
+            }
+        }, false);
+        
+        ac.addEventListener("cached", function () {
+            setCache("✓ اكتمل التنزيل - الموقع جاهز للعمل أوفلاين!", true);
+            updateProgress(100, "اكتمل التخزين");
+            waitForTap("✓ تم التخزين بنجاح! اضغط للتشغيل", go);
+        }, false);
+        
+        ac.addEventListener("updateready", function () {
+            try { ac.swapCache(); } catch (e) {}
+            setCache("✓ تم تحميل التحديث", true);
+            updateProgress(100, "تحديث جاهز");
+            waitForTap("✓ تحديث جاهز - اضغط لإعادة التحميل", function () { 
+                location.reload(); 
+            });
+        }, false);
+        
+        ac.addEventListener("noupdate", function () {
+            setCache("✓ التخزين المؤقت محدّث وجاهز", true);
+            updateProgress(95, "محدّث");
+            go();
+        }, false);
+        
+        ac.addEventListener("error", function () {
+            setCache("⚠ فشل التخزين المؤقت", false);
+            updateProgress(80, "خطأ في Cache");
+            waitForTap("⚠ فشل التخزين - اضغط للتشغيل", go);
+        }, false);
+        
+        ac.addEventListener("obsolete", function () {
+            setCache("⚠ Cache قديم", false);
+            updateProgress(70, "تحديث Cache");
+            waitForTap("⚠ Cache قديم - اضغط للتحديث", go);
+        }, false);
+    }
+})();
+</script>
+
+</body>
+</html>
