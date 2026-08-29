@@ -4,17 +4,174 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HAMDON.COM | PS4 Exploit Host</title>
-<link rel="stylesheet" href="style.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@400;700;900&display=swap');
+
+:root {
+  --neon-green: #00ff88;
+  --neon-blue: #00d4ff;
+  --neon-purple: #b026ff;
+  --dark-bg: #05070e;
+  --card-bg: rgba(15, 20, 35, 0.85);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  min-height: 100vh;
+  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  color: #eaf2ff;
+  background: var(--dark-bg);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: 
+    radial-gradient(1100px 600px at 85% -10%, rgba(0, 255, 136, 0.12), transparent 55%),
+    radial-gradient(900px 520px at -5% 115%, rgba(0, 212, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, #060b16 0%, #0a1224 45%, #05070e 100%);
+  background-attachment: fixed;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Top Bar --- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+}
+
+.brand { display: flex; align-items: center; }
+
+.brand-logo {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--neon-green);
+  background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,212,255,0.2));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; color: var(--neon-green);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.brand-text { margin-right: 14px; text-align: right; }
+.brand-name { display: block; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; color: #fff; }
+.brand-sub { display: block; font-size: 12px; color: #7d93b8; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+
+.badge {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--neon-green);
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.1);
+  padding: 6px 16px; border-radius: 999px;
+}
+
+/* --- Main Content --- */
+.wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
+
+.hero { margin-bottom: 30px; text-align: center; }
+.hero-title { font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: 1px; line-height: 1.2; }
+.hero-title .accent {
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub { margin-top: 10px; font-size: 16px; letter-spacing: 2px; color: #7d93b8; font-weight: 600; }
+
+/* --- Status Panel --- */
+.status-panel {
+  max-width: 700px; width: 100%; margin: 0 auto 40px; padding: 24px;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.status-text { font-size: 18px; letter-spacing: 0.5px; color: #a9c1e6; transition: all 0.3s ease; display: block; margin-bottom: 15px; }
+.status-text.loading { animation: pulse 1.4s ease-in-out infinite; color: var(--neon-blue); }
+.status-text.error { color: #ff4466; }
+.status-text.success { color: var(--neon-green); font-weight: 700; text-shadow: 0 0 15px rgba(0, 255, 136, 0.4); }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.btn {
+  display: inline-block; padding: 12px 32px; font-size: 16px; font-weight: 800;
+  letter-spacing: 1px; color: #05070e;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+  border: none; border-radius: 999px; cursor: pointer;
+  transition: all 0.2s ease; font-family: 'Cairo', sans-serif;
+}
+.btn:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4); }
+.btn.hidden { display: none; }
+
+/* --- Firmware Grid --- */
+.fw-section { width: 100%; }
+.fw-heading { font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #7d93b8; margin-bottom: 20px; text-align: center; }
+
+.fw-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+
+.fw-card {
+  flex: 1 1 140px; max-width: 160px;
+  padding: 20px 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px; text-align: center;
+  transition: all 0.25s ease;
+}
+.fw-card:hover { transform: translateY(-4px); border-color: rgba(0, 212, 255, 0.3); }
+.fw-card.active {
+  border-color: var(--neon-green);
+  background: linear-gradient(180deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.02));
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.2);
+}
+
+.fw-ver { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.fw-card.active .fw-ver { color: var(--neon-green); }
+
+.fw-chain {
+  display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 999px; text-transform: uppercase;
+}
+.fw-chain.lapse { background: rgba(0, 212, 255, 0.15); color: var(--neon-blue); border: 1px solid rgba(0, 212, 255, 0.3); }
+.fw-chain.poops { background: rgba(176, 38, 255, 0.15); color: var(--neon-purple); border: 1px solid rgba(176, 38, 255, 0.3); }
+
+/* --- Footer --- */
+.foot { padding: 20px 0; text-align: center; font-size: 12px; color: #5d7294; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+@media (max-width: 700px) {
+  .hero-title { font-size: 28px; }
+  .fw-card { flex: 1 1 120px; max-width: 140px; padding: 15px 10px; }
+}
+</style>
 </head>
 <body>
-
-<!-- فيديو الخلفية -->
-<video id="bg-video" autoplay muted loop playsinline preload="auto">
-    <source src="background.mp4" type="video/mp4">
-</video>
-
-<!-- طبقة التعتيم فوق الفيديو -->
-<div class="video-overlay"></div>
 
 <div class="shell">
     <header class="topbar">
@@ -25,38 +182,38 @@
                 <span class="brand-sub">PS4 Jailbreak Host</span>
             </div>
         </div>
-        <div class="badge">JB v3.2</div>
+        <div class="badge">v3.2 Stable</div>
     </header>
 
     <main class="wrap">
         <section class="hero">
-            <h1 class="hero-title">PS4 <span class="accent">WebKit</span> Exploit Host</h1>
+            <h1 class="hero-title">PS4 <span class="accent">WebKit</span> Exploit</h1>
             <p class="hero-sub">اكتشاف تلقائي للإصدار وسلسلة التهكير المناسبة</p>
         </section>
 
         <section class="status-panel">
-            <span id="msgs" class="status-text loading">⏳ Starting...</span>
+            <span id="msgs" class="status-text loading">⏳ جارٍ فحص النظام...</span>
             <br>
-            <button id="runBtn" class="btn hidden" type="button">▶ Run now</button>
+            <button id="runBtn" class="btn hidden" type="button">▶ ابدأ التهكير الآن</button>
         </section>
 
         <section class="fw-section">
-            <h2 class="fw-heading">Supported Firmware</h2>
+            <h2 class="fw-heading">الإصدارات المدعومة</h2>
             <div class="fw-grid">
-                <div class="fw-card" data-fw="11.00"><div class="fw-ver">11.00</div><span class="fw-chain lapse">Lapse Chain</span></div>
-                <div class="fw-card" data-fw="11.50"><div class="fw-ver">11.50</div><span class="fw-chain lapse">Lapse Chain</span></div>
-                <div class="fw-card" data-fw="11.52"><div class="fw-ver">11.52</div><span class="fw-chain lapse">Lapse Chain</span></div>
-                <div class="fw-card" data-fw="12.00"><div class="fw-ver">12.00</div><span class="fw-chain lapse">Lapse Chain</span></div>
-                <div class="fw-card" data-fw="12.02"><div class="fw-ver">12.02</div><span class="fw-chain lapse">Lapse Chain</span></div>
-                <div class="fw-card" data-fw="12.50"><div class="fw-ver">12.50</div><span class="fw-chain poops">Poops Chain</span></div>
-                <div class="fw-card" data-fw="12.52"><div class="fw-ver">12.52</div><span class="fw-chain poops">Poops Chain</span></div>
-                <div class="fw-card" data-fw="13.00"><div class="fw-ver">13.00</div><span class="fw-chain poops">Poops Chain</span></div>
+                <div class="fw-card" data-fw="11.00"><div class="fw-ver">11.00</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="11.50"><div class="fw-ver">11.50</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="11.52"><div class="fw-ver">11.52</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.00"><div class="fw-ver">12.00</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.02"><div class="fw-ver">12.02</div><span class="fw-chain lapse">Lapse</span></div>
+                <div class="fw-card" data-fw="12.50"><div class="fw-ver">12.50</div><span class="fw-chain poops">Poops</span></div>
+                <div class="fw-card" data-fw="12.52"><div class="fw-ver">12.52</div><span class="fw-chain poops">Poops</span></div>
+                <div class="fw-card" data-fw="13.00"><div class="fw-ver">13.00</div><span class="fw-chain poops">Poops</span></div>
             </div>
         </section>
     </main>
 
     <footer class="foot">
-        <p>❤️ Special thanks to all scene developers</p>
+        <p>❤️ Special thanks to all scene developers & HAMDON.COM</p>
     </footer>
 </div>
 
@@ -100,11 +257,13 @@
         if (redirected || !isPS4 || !bug) return;
         redirected = true;
         var target = bug === 'lapse' ? 'run_lapse.html' : 'run_poops.html';
-        updateStatus('🚀 Loading ' + (bug === 'lapse' ? 'Lapse' : 'Poops') + ' exploit...');
-        window.location.replace(target);
+        updateStatus('🚀 جارٍ تحميل سلسلة ' + (bug === 'lapse' ? 'Lapse' : 'Poops') + '...', 'success');
+        setTimeout(function() {
+            window.location.replace(target);
+        }, 800);
     }
 
-    // ========== الكاش (AppCache) ==========
+    // ========== منطق الكاش (AppCache) الذكي ==========
     var cacheState = 'unknown';
     var SAFETY_MS = 30000;
 
@@ -115,25 +274,25 @@
     var appCache = window.applicationCache;
     if (appCache) {
         appCache.addEventListener('checking', function() {
-            updateStatus('⏳ Checking cache...');
+            updateStatus('⏳ جارٍ التحقق من الملفات...');
         }, false);
         appCache.addEventListener('downloading', function() {
-            updateStatus('📥 Installing cache (first visit)...');
+            updateStatus('📥 جارٍ تنزيل الملفات للعمل أوفلاين (أول زيارة)...', 'loading');
         }, false);
         appCache.addEventListener('progress', function(e) {
             if (e && e.total) {
                 var pct = Math.round((e.loaded / e.total) * 100);
-                updateStatus('📥 Caching ' + pct + '%...');
+                updateStatus('📥 جارٍ التنزيل: ' + pct + '%...', 'loading');
             }
         }, false);
         appCache.addEventListener('cached', function() {
             cacheState = 'cold';
-            updateStatus('✅ Cache installed. Press ▶ Run now to start.', 'success');
+            updateStatus('✅ تم حفظ الملفات بنجاح. اضغط على "ابدأ التهكير الآن"', 'success');
             showRunButton();
         }, false);
         appCache.addEventListener('noupdate', function() {
             cacheState = 'warm';
-            updateStatus('✅ Cache ready -- starting...', 'success');
+            updateStatus('✅ الملفات محدثة وجاهزة - جارٍ البدء...', 'success');
             setTimeout(redirectToRun, 600);
         }, false);
         appCache.addEventListener('updateready', function() {
@@ -141,41 +300,24 @@
             if (!reloadedOnce) {
                 reloadedOnce = true;
                 try { sessionStorage.setItem(RELOAD_KEY, '1'); } catch (e) {}
-                updateStatus('🔄 Update ready -- reloading once...');
+                updateStatus('🔄 يوجد تحديث - جارٍ إعادة التحميل...', 'loading');
                 setTimeout(function() { location.reload(); }, 300);
             } else {
                 cacheState = 'warm';
-                updateStatus('✅ Cache updated -- starting...', 'success');
+                updateStatus('✅ تم التحديث بنجاح - جارٍ البدء...', 'success');
                 setTimeout(redirectToRun, 600);
             }
         }, false);
         appCache.addEventListener('error', function() {
             cacheState = 'error';
-            updateStatus('⚠️ Cache unavailable -- press ▶ Run now (network mode).');
+            updateStatus('⚠️ فشل حفظ الكاش - اضغط "ابدأ" للتشغيل عبر الإنترنت', 'error');
             showRunButton();
         }, false);
         appCache.addEventListener('obsolete', function() {
             cacheState = 'error';
-            updateStatus('⚠️ Cache obsolete -- press ▶ Run now.');
+            updateStatus('⚠️ الكاش قديم - اضغط "ابدأ" للمتابعة', 'error');
             showRunButton();
         }, false);
-    }
-
-    // ========== تحسين أداء الفيديو ==========
-    var bgVideo = document.getElementById('bg-video');
-    if (bgVideo) {
-        // إيقاف الفيديو إذا فشل التحميل
-        bgVideo.addEventListener('error', function() {
-            bgVideo.style.display = 'none';
-        });
-        // تقليل استهلاك الذاكرة عند عدم الرؤية
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                bgVideo.pause();
-            } else {
-                bgVideo.play().catch(function() {});
-            }
-        });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -189,18 +331,16 @@
         }
 
         if (!isPS4) {
-            updateStatus('⚠️ This page is for PS4 only!', 'error');
+            updateStatus('⚠️ هذه الصفحة مخصصة لجهاز PS4 فقط!', 'error');
             return;
         }
 
         if (!bug) {
-            updateStatus('❌ Unsupported Firmware: ' + fwVersion, 'error');
+            updateStatus('❌ الإصدار غير مدعوم: ' + fwVersion, 'error');
             return;
         }
 
-        updateStatus('✅ Detected PS4 Firmware: ' + fwVersion
-            + ' (' + (bug === 'lapse' ? 'Lapse' : 'Poops') + ' chain)');
-
+        updateStatus('✅ تم اكتشاف جهاز PS4 بالإصدار: ' + fwVersion + ' (' + (bug === 'lapse' ? 'Lapse' : 'Poops') + ')', 'success');
         runBtn.className = 'btn';
         runBtn.addEventListener('click', redirectToRun, false);
 
@@ -211,7 +351,7 @@
 
         setTimeout(function() {
             if (!redirected) {
-                updateStatus('⏳ Cache is slow -- press ▶ Run now when ready.');
+                updateStatus('⏳ التنزيل بطيء - اضغط "ابدأ التهكير الآن" عندما تكون مستعداً', 'loading');
                 showRunButton();
             }
         }, SAFETY_MS);
